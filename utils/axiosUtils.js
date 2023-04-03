@@ -8,18 +8,22 @@ export const initializeAxios = () => {
 }
 
 export const setDefaultAxiosHeaders = () => {
-    // setAxiosDefaultTokenFromLocalStorage();
+    setAxiosDefaultTokenFromLocalStorage();
     axios.defaults.headers.post['Content-Type'] = 'application/json';
 }
 
 //Set auth token to axios default header if user present in local storage
 export const setAxiosDefaultTokenFromLocalStorage = () => {
     if (typeof window !== 'undefined') {
-        const userData = JSON.parse(localStorage.getItem('user')??'{}');
+        const userData = JSON.parse(localStorage.getItem('jobUser')??'{}');
         if(userData?.token){
             setCommonAuthorizationToken(userData?.token);
         }
     }
+}
+
+export const setCommonAuthorizationToken = (token) => {
+    axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
 }
 
 
@@ -34,12 +38,7 @@ const interceptResponse = () => {
             };
         },
         (error) => {
-            if(error?.response?.data){
-         
-                if(error.response.status===401){
-                   gotoLogin()
-                }
-             
+            if(error?.response?.data){     
                 return {
                     ok: false,
                     error: {

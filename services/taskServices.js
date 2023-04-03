@@ -3,10 +3,16 @@ import {
     postApiCall,
     putApiCall,
     patchApiCall,
-    deleteApiCall
- } from "@/config/apiConfig";
+    deleteApiCall,
+ } from "../config/apiConfig";
 
-import { GET_ALL_TASKS,CREATE_TASKS,DELETE_TASKS ,UPDATE_TASKS} from "@/config/urlConfig";
+import { GET_ALL_TASKS,
+      CREATE_TASKS,
+      DELETE_TASKS,
+      UPDATE_TASKS,
+      LOGIN_URL,
+      REGISTER_URL
+    } from "../config/urlConfig";
 
 class TaskService{
     constructor(getApiCall,postApiCall,putApiCall,patchApiCall,deleteApiCall){
@@ -39,6 +45,19 @@ class TaskService{
        const respons= await this.patchApiCall(url)
        return respons
     }
+
+    login = async(body) =>{
+        const respons= await this.postApiCall(LOGIN_URL,body)
+        console.log("responsIn",respons)
+        return respons
+    }
+
+    register = async(body) =>{
+        const respons= await this.postApiCall(REGISTER_URL,body)
+        console.log("responsIn",respons)
+        return respons
+    }
+    
 }
 
 export const taskServiceObj= new TaskService(

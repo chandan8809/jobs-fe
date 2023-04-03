@@ -20,6 +20,7 @@ export const postApiCall = async(url,body={},queryParams={},headers={}) =>{
          params:queryParams,
          headers:headers
         })
+        console.log("resp",respons)
         return respons
     }
     catch(err){

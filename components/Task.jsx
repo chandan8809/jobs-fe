@@ -1,4 +1,4 @@
-import { taskServiceObj } from '@/services/taskServices'
+import { taskServiceObj } from '../services/taskServices'
 import React, { useEffect, useState } from 'react'
 
 const Task = () => {
@@ -8,7 +8,7 @@ const Task = () => {
    const getAllTasks=async()=>{
       const response =await taskServiceObj.getAllTasks()
     
-      setTasks(response.data.tasks)
+      setTasks(response.data?.tasks)
     }
 
    const createTasks=async(query)=>{
